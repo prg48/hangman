@@ -6,7 +6,7 @@ This is an implementation of the Hangman game, where the computer thinks of a wo
 # Milestone 1
 The following is the code written for Milestone 1 of the Hangman project
 
-```
+```python
 import random
 
 word_list = ["apple", "pear", "banana", "watermelon", "grapes"]

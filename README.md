@@ -119,3 +119,72 @@ There are two methods available for the class. The `check_guess` method takes an
 ```markdown
 First clone the project. navigate to the root directory of the project and run the command `python3 milestone_4.py`.
 ```
+
+# Milestone 5
+The following code is written for Milestone 5 for the Hangman project.
+
+```python
+import random
+
+class HangMan:
+    def __init__(self, word_list, num_lives=5):
+        self.word = random.choice(word_list)
+        self.word_guessed = ['' for _ in self.word]
+        self.num_letters = len(set(self.word))
+        self.word_list = word_list
+        self.num_lives = num_lives
+        self.list_of_guesses = []
+
+    def check_guess(self, guess):
+        guess = guess.lower()
+        if guess in self.word:
+            print(f"Good guess! '{guess}' is in the word.")
+            first_idx = -1 # int to start searching for the index of guess in word
+            for letter in self.word:
+                if letter == guess:
+                    idx = self.word.index(guess, first_idx + 1) # check for the index of guess in word
+                    self.word_guessed[idx] = guess
+                    first_idx = idx
+            self.num_letters -= 1
+
+        else:
+            self.num_lives -= 1
+            print(f"Sorry, '{guess}' is not in the word.")
+            print(f"You have {self.num_lives} lives left.")
+
+    
+    def ask_for_input(self):
+        guess = input("Please guess a letter: ")
+        if len(guess) > 1 or not guess.isalpha():
+            print("Invalid letter. Please, enter a single alphabetic character.")
+        elif guess in self.list_of_guesses:
+            print("You already tried that letter!")
+        else:
+            self.check_guess(guess)
+            self.list_of_guesses.append(guess)
+
+def play_game(word_list):
+    num_lives = 5
+    game = HangMan(word_list, num_lives)
+    while True:
+        if game.num_lives == 0:
+            print("You lost!")
+            break
+        elif game.num_letters > 0:
+            game.ask_for_input()
+        elif game.num_lives != 0 and game.num_letters == 0:
+            print("Congratulations. You won the game!")
+            break
+
+if __name__ == "__main__":
+    play_game(["apple", "grape"])
+```
+
+The `HangMan` class is the main class that defines the game. It has two methods, `ask_for_input` and `check_guess`. The `ask_for_input` method does not take any arguments. It asks the user for input and validates it. If the input is valid, it then calls the `check_guess` method with the user entered input as argument. The `check_guess` method then checks if the argument provided is in the word for the game and updates the corresponding attributes. 
+
+The function that starts the game loop is `play_game`, which takes in an argument; the list of words for the game. The function initialises the `HangMan` class and sets the loop in motion. It also checks for if the user has lost, won or still in game. The game can be run in one of two ways: 
+```markdown
+* clone the project and navigate to the root of the project. Then, import play_game method in a new .py script with `from milestone_5 import play_game`. run the play_game function in the new script by passing in a word list argument.
+
+* clone the project and navigate to the root of the project. Then, run `python3 milestone_5.py`
+```

@@ -104,8 +104,15 @@ The `HangMan` class has the following attributes:
 * `list_of_guesses` = the list of guesses the player has taken.
 
 The `HangMan` class must be initialised with two parameters: `word_list` and `num_lives`. `word_list` is required, whereas, `num_lives` is optional with a default value of 5. Like follows: 
-* `hangman = HangMan(["apple", "bananas", "pears"])`
-* `hangman = HangMan(["apple", "bananas", "pears"], 10)`
+```python
+# Initialise the game with default lives
+hangman = HangMan(["apple", "bananas", "pears"])
+# OR Initialise game with 10 lives.
+hangman = HangMan(["apple", "bananas", "pears"], 10)
+```
 
 There are two methods available for the class. The `check_guess` method takes an argument `guess` and checks if the guess letter is present in `self.word` and updates the related attributes. The `ask_for_input` method asks the player for input, validates the input and starts the game. The game can be started with the `ask_for_input` method after it has been initialised. Like follows:
-* `hangman.ask_for_input()`
+```python
+# After Initialisation to run the game
+hangman.ask_for_input()
+```

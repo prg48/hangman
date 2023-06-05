@@ -50,3 +50,62 @@ if __name__ == "__main__":
 ```
 
 The `ask_for_input` function asks the user to enter a letter, validates it and returns the letter. The `check_guess` function takes in two parameters, `guess` and `word` and checks if the guess letter is in the word and prints the correct statement. In the `main` of the program, first a `word_list` variable is defined with five fruits. A random fruit is then assigned to the `word` variable. Then the `ask_for_input` function is called and the return value assigned to the `guess` variable. Finally, `check_guess` function is called with `guess` and `word` variable passed as arguments.
+
+# Milestone 4
+The following code is written for the Milestone 4 for the Hangman project.
+
+```python
+import random
+
+class HangMan:
+    def __init__(self, word_list, num_lives=5):
+        self.word = random.choice(word_list)
+        self.word_guessed = ['' for _ in self.word]
+        self.num_letters = len(set(self.word))
+        self.word_list = word_list
+        self.num_lives = num_lives
+        self.list_of_guesses = []
+
+    def check_guess(self, guess):
+        guess = guess.lower()
+        if guess in self.word:
+            print(f"Good guess! '{guess}' is in the word.")
+            first_idx = -1 
+            for letter in self.word:
+                if letter == guess:
+                    idx = self.word.index(guess, first_idx + 1) 
+                    self.word_guessed[idx] = guess
+                    first_idx = idx
+            self.num_letters -= 1
+
+        else:
+            self.num_lives -= 1
+            print(f"Sorry, '{guess}' is not in the word.")
+            print(f"You have {self.num_lives} lives left.")
+
+    
+    def ask_for_input(self):
+        while True:
+            guess = input("Please guess a letter: ")
+            if len(guess) > 1 or not guess.isalpha():
+                print("Invalid letter. Please, enter a single alphabetic character.")
+            elif guess in self.list_of_guesses:
+                print("You already tried that letter!")
+            else:
+                self.check_guess(guess)
+                self.list_of_guesses.append(guess)
+```
+The `HangMan` class has the following attributes:
+* `word_list` = list of words for the game.
+* `num_lives` = number of lives a player gets to play the game.
+* `word` = random word from the word_list
+* `word_guessed` = words guessed from the word in their corresponding position.
+* `num_letters` = the unique number of letters in the word.
+* `list_of_guesses` = the list of guesses the player has taken.
+
+The `HangMan` class must be initialised with two parameters: `word_list` and `num_lives`. `word_list` is required, whereas, `num_lives` is optional with a default value of 5. Like follows: 
+* `hangman = HangMan(["apple", "bananas", "pears"])`
+* `hangman = HangMan(["apple", "bananas", "pears"], 10)`
+
+There are two methods available for the class. The `check_guess` method takes an argument `guess` and checks if the guess letter is present in `self.word` and updates the related attributes. The `ask_for_input` method asks the player for input, validates the input and starts the game. The game can be started with the `ask_for_input` method after it has been initialised. Like follows:
+* `hangman.ask_for_input()`

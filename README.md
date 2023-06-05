@@ -94,6 +94,10 @@ class HangMan:
             else:
                 self.check_guess(guess)
                 self.list_of_guesses.append(guess)
+
+    if __name__ == "__main__":
+    hangman = HangMan(["apple", "grapes"])
+    hangman.ask_for_input()
 ```
 The `HangMan` class has the following attributes:
 * `word_list` = list of words for the game.
@@ -111,8 +115,7 @@ hangman = HangMan(["apple", "bananas", "pears"])
 hangman = HangMan(["apple", "bananas", "pears"], 10)
 ```
 
-There are two methods available for the class. The `check_guess` method takes an argument `guess` and checks if the guess letter is present in `self.word` and updates the related attributes. The `ask_for_input` method asks the player for input, validates the input and starts the game. The game can be started with the `ask_for_input` method after it has been initialised. Like follows:
-```python
-# After Initialisation to run the game
-hangman.ask_for_input()
+There are two methods available for the class. The `check_guess` method takes an argument `guess` and checks if the guess letter is present in `self.word` and updates the related attributes. The `ask_for_input` method asks the player for input, validates the input and starts the game. To run the game:
+```markdown
+First clone the project. navigate to the root directory of the project and run the command `python3 milestone_4.py`.
 ```

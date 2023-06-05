@@ -38,7 +38,7 @@ class HangMan:
         """
         guess = guess.lower()
         if guess in self.word:
-            print("Good guess! {guess} is in the word.")
+            print(f"Good guess! '{guess}' is in the word.")
             first_idx = -1 # int to start searching for the index of guess in word
             for letter in self.word:
                 if letter == guess:
@@ -48,6 +48,11 @@ class HangMan:
                     print(self.word_guessed) ### TOREMOVE
             self.num_letters -= 1
             print(self.num_letters) ### TOREMOVE
+
+        else:
+            self.num_lives -= 1
+            print(f"Sorry, '{guess}' is not in the word.")
+            print(f"You have {self.num_lives} lives left.")
 
     
     def ask_for_input(self):

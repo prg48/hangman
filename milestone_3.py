@@ -18,6 +18,8 @@ def check_guess(guess, word):
 if __name__ == "__main__":
     word_list = ["apple", "banana", "pears", "grapes", "watermelon"]
     word = random.choice(word_list)
-    guess = ask_for_input()
-    check_guess(guess, word)
+    while True:
+        guess = ask_for_input()
+        if check_guess(guess, word):
+            break
     
